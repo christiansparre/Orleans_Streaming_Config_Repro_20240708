@@ -1,11 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Azure.Data.Tables;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Orleans.Configuration;
 using Orleans_Streaming_Config_Repro_20240708.Grains;
 
 var builder = Host.CreateDefaultBuilder();
 
-builder.ConfigureAppConfiguration(configurationBuilder => configurationBuilder.AddUserSecrets(typeof(Program).Assembly, optional: true));
+builder.ConfigureAppConfiguration(configurationBuilder => configurationBuilder
+    .AddJsonFile("appsettings.json")
+    .AddUserSecrets(typeof(Program).Assembly, optional: true));
 
 builder.UseOrleans((ctx, silo) =>
 {
@@ -28,7 +31,7 @@ builder.UseOrleans((ctx, silo) =>
 
         configurator.UseAzureTableCheckpointer(checkpointerOptionsBuilder => checkpointerOptionsBuilder.Configure(checkPointerOptions =>
         {
-            checkPointerOptions.ConfigureTableServiceClient("UseDevelopmentStorage=true");
+            checkPointerOptions.TableServiceClient = new TableServiceClient("UseDevelopmentStorage=true");
         }));
 
         silo.AddMemoryGrainStorage("PubSubStore");
