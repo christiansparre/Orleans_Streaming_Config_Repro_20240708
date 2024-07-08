@@ -8,3 +8,7 @@ public interface IHelloWorldGrain : IGrainWithStringKey
 
     Task<HelloMessage> Hello(string name);
 }
+
+public interface IHelloWorldConsumerGrain : IGrainWithStringKey
+{
+}

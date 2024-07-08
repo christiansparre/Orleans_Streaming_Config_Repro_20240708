@@ -8,6 +8,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Orleans.Runtime" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Orleans.Sdk" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Orleans.Streaming" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Orleans_Streaming_Config_Repro_20240708.Grains.Interfaces\Orleans_Streaming_Config_Repro_20240708.Grains.Interfaces.csproj" />
